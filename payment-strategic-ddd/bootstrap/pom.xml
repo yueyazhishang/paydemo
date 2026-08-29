@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zx.payment</groupId>
+    <artifactId>payment-ddd-v2</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>bootstrap</artifactId>
+
+  <name>启动与装配</name>
+  <description>
+    唯一允许依赖所有上下文的模块。职责：跨上下文编排、集成事件投递、REST 接口。
+    跨上下文的组合逻辑只允许写在这里，且传入传出必须是 DTO/值对象，不能是领域聚合。
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.zx.payment</groupId>
+      <artifactId>acquisition-application</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.zx.payment</groupId>
+      <artifactId>refund-application</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.zx.payment</groupId>
+      <artifactId>reconciliation-domain</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.zx.payment</groupId>
+      <artifactId>channel-infrastructure</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</project>

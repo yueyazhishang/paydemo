@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zx.payment</groupId>
+    <artifactId>refund-context</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>refund-domain</artifactId>
+
+  <name>退款上下文 · 领域层</name>
+  <description>
+    【关键约束】本模块仅依赖 shared-kernel，绝不允许依赖 acquisition-domain。
+    退款上下文眼里的"支付"是 PaidFact（不可变事实快照），不是收单上下文的 Payment 聚合。
+    这条依赖声明就是限界上下文的物理边界——想违规 import 也编译不过。
+  </description>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.zx.payment</groupId>
+      <artifactId>shared-kernel</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</project>

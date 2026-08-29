@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zx.payment</groupId>
+    <artifactId>acquisition-context</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>acquisition-application</artifactId>
+
+  <name>收单上下文 · 应用层</name>
+  <description>对外暴露的用例边界。外部上下文只能看到这一层。</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.zx.payment</groupId>
+      <artifactId>acquisition-domain</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</project>

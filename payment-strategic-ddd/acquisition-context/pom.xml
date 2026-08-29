@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zx.payment</groupId>
+    <artifactId>payment-ddd-v2</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>acquisition-context</artifactId>
+  <packaging>pom</packaging>
+
+  <name>收单上下文（核心域）</name>
+
+  <modules>
+    <module>acquisition-domain</module>
+    <module>acquisition-application</module>
+  </modules>
+</project>

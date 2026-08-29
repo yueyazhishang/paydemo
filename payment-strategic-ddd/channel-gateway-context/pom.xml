@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zx.payment</groupId>
+    <artifactId>payment-ddd-v2</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>channel-gateway-context</artifactId>
+  <packaging>pom</packaging>
+
+  <name>通道网关上下文（防腐层）</name>
+  <description>对称 ACL：出站指令翻译 + 入站回执翻译。</description>
+
+  <modules>
+    <module>channel-domain</module>
+    <module>channel-infrastructure</module>
+  </modules>
+</project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zx.payment</groupId>
+    <artifactId>channel-gateway-context</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>channel-infrastructure</artifactId>
+
+  <name>通道网关 · 基础设施层</name>
+  <description>微信 v3（RSA 平台证书验签）与 Stripe（Webhook HMAC）两个适配器。</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.zx.payment</groupId>
+      <artifactId>channel-domain</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</project>
