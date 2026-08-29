@@ -1,0 +1,92 @@
+# 支付系统配置
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: payment-system-demo
+  
+  # H2内存数据库配置(演示用，生产环境请使用MySQL/PostgreSQL)
+  datasource:
+    url: jdbc:h2:mem:paymentdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# 支付通道配置
+payment:
+  # 微信支付配置
+  wechat:
+    appId: your_wechat_appid
+    mchId: your_wechat_mch_id
+    apiKey: your_wechat_api_key
+    notifyUrl: http://your-domain.com/api/webhook/wechat
+  
+  # 支付宝配置
+  alipay:
+    appId: your_alipay_appid
+    privateKey: your_alipay_private_key
+    publicKey: your_alipay_public_key
+    notifyUrl: http://your-domain.com/api/webhook/alipay
+    gateway: https://openapi.alipay.com/gateway.do
+  
+  # Stripe配置
+  stripe:
+    apiKey: your_stripe_api_key
+    webhookSecret: your_stripe_webhook_secret
+    apiBase: https://api.stripe.com
+  
+  # PayPal配置
+  paypal:
+    clientId: your_paypal_client_id
+    clientSecret: your_paypal_client_secret
+    mode: sandbox  # sandbox or live
+  
+  # Apple Pay配置
+  applepay:
+    merchantId: your_merchant_id
+    displayName: Your Store Name
+    certificatePath: /path/to/certificate
+  
+  # 京东支付配置
+  jdpay:
+    merchantId: your_jdpay_merchant_id
+    desKey: your_des_key
+    md5Key: your_md5_key
+    notifyUrl: http://your-domain.com/api/webhook/jdpay
+  
+  # Adyen配置
+  adyen:
+    apiKey: your_adyen_api_key
+    merchantAccount: your_adyen_merchant_account
+    clientKey: your_adyen_client_key
+    environment: test  # test or live
+  
+  # Worldpay配置
+  worldpay:
+    serviceKey: your_worldpay_service_key
+    clientKey: your_worldpay_client_key
+
+# 日志配置
+logging:
+  level:
+    com.payment: DEBUG
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
