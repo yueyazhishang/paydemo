@@ -2,6 +2,8 @@
 
 This DESIGN.md captures the DDD-oriented design decisions, domain model, bounded contexts and key flows for the payment-demo module. It's written for research into DDD applied to cross-border payments.
 
+NOTE: Module artifactId has been renamed to `payment-core` to avoid duplicate naming with the repository root.
+
 1. Goals
 - Focus on domain-first design: aggregates, value objects, domain services, domain events, repositories (contracts), and process managers (Sagas).
 - Provide adapters as contracts/stubs to demonstrate the anti-corruption layer; external SDKs or HTTP implementations are optional examples.

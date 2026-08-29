@@ -14,4 +14,4 @@ What is included
 - Tests: domain-level tests and adapter-contract style unit tests
 - DESIGN.md: high-level design notes, sequence flows, bounded contexts and trade-offs
 
-If you are interested in a smaller, dependency-free artifact for publication or peer review, I can remove external SDKs and keep only the domain & contract tests. Currently the code contains example integrations but those are clearly marked.
+Module artifactId renamed to `payment-core` in pom.xml to avoid name duplication with repository root.

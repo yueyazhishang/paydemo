@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yueyazhishang.paydemo.payment.domain.Payment;
 import com.yueyazhishang.paydemo.payment.domain.PaymentRepository;
-import com.yueyazhishang.paydemo.payment.domain.PaymentStatus;
-import com.yueyazhishang.paydemo.payment.infra.adapter.ChannelAdapter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,12 +12,10 @@ import java.util.Optional;
 @Service
 public class ProcessWebhookService {
     private final PaymentRepository paymentRepository;
-    private final ChannelAdapter paypalAdapter; // used if needed
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public ProcessWebhookService(PaymentRepository paymentRepository, ChannelAdapter paypalAdapter) {
+    public ProcessWebhookService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
-        this.paypalAdapter = paypalAdapter;
     }
 
     @Transactional
@@ -42,6 +38,33 @@ public class ProcessWebhookService {
                 }
             }
             // handle other event types as needed
+        } catch (Exception e) {
+            // log
+        }
+    }
+
+    @Transactional
+    public void processStripeWebhook(String normalizedJson) {
+        try {
+            JsonNode node = mapper.readTree(normalizedJson);
+            String type = node.get("type").asText();
+            String id = node.get("id").asText();
+
+            // Map Stripe events to domain actions: payment_intent.succeeded -> COMPLETED, payment_intent.payment_failed -> FAILED
+            if ("payment_intent.succeeded".equalsIgnoreCase(type) || "payment_intent.payment_failed".equalsIgnoreCase(type)) {
+                Optional<Payment> pOpt = paymentRepository.findByExternalId(id);
+                if (pOpt.isPresent()) {
+                    Payment p = pOpt.get();
+                    if ("payment_intent.succeeded".equalsIgnoreCase(type)) {
+                        p.markCompleted();
+                    } else {
+                        p.markFailed();
+                    }
+                    paymentRepository.save(p);
+                }
+            }
+
+            // Handle other Stripe event types as required
         } catch (Exception e) {
             // log
         }

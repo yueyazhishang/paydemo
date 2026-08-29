@@ -22,7 +22,10 @@ public class WebhookController {
     @PostMapping("/stripe")
     public ResponseEntity<String> stripeWebhook(@RequestBody String payload, @RequestHeader(value = "Stripe-Signature", required = false) String sig) {
         String normalized = stripeAdapter.handleWebhook(payload, sig);
-        // For demo we do not parse stripe events into domain yet
+        if ("invalid".equals(normalized) || "error".equals(normalized)) {
+            return ResponseEntity.status(400).body("invalid");
+        }
+        processWebhookService.processStripeWebhook(normalized);
         return ResponseEntity.ok("ok");
     }
 
