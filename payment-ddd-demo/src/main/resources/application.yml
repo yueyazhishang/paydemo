@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: payment-ddd-demo
+  datasource:
+    url: jdbc:mysql://localhost:3306/payment_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none          # 表结构由 schema.sql 管理
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always            # Demo 用 create-drop 时建议改为 never
+      schema-locations: classpath:schema.sql
+
+server:
+  port: 8080
+
+pay:
+  # 渠道异步回调地址前缀（真实部署时为外网可达域名）
+  notify-base-url: http://localhost:8080
+  # 各渠道商户配置（Demo 占位，真实接入时替换为 SDK 凭证）
+  channels:
+    wechat:
+      mch-id: "1900000001"
+      app-id: "wx8888888888888888"
+      api-v3-key: "demo-api-v3-key"
+    alipay:
+      app-id: "2021000000000001"
+      private-key: "demo-rsa2-private-key"
+      alipay-public-key: "demo-alipay-public-key"
+    jd:
+      merchant-no: "JD-MCH-0001"
+      private-key: "demo-jd-private-key"
+    paypal:
+      client-id: "demo-paypal-client-id"
+      client-secret: "demo-paypal-secret"
+      mode: sandbox
+    applepay:
+      # Apple Pay 本身是钱包能力，服务端由处理方（如 Stripe/PSP）代收
+      processor: "STRIPE"
+    antom:
+      client-id: "demo-antom-client-id"
+      merchant-private-key: "demo-antom-key"
+    worldpay:
+      merchant-code: "WP-MCH-0001"
+      xml-password: "demo-wp-password"
+    stripe:
+      secret-key: "sk_test_demo"
+      webhook-secret: "whsec_demo"
