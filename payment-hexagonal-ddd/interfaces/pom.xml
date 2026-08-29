@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.zxpay</groupId>
+        <artifactId>payment-ddd</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>interfaces</artifactId>
+    <packaging>jar</packaging>
+
+    <name>payment :: interfaces</name>
+    <description>入站适配器：商户 REST API、通道异步回调网关、内部管理接口。只做协议转换与鉴权，不含业务规则。</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zxpay</groupId>
+            <artifactId>application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!--
+          装配根（Composition Root）放在本模块：运行时才需要 infrastructure，
+          声明为 runtime 作用域，保证编译期 interfaces 无法直接引用具体适配器实现。
+          这是本 Demo 对「纯六边形」的唯一一处工程性妥协，理由见 docs/05。
+        -->
+        <dependency>
+            <groupId>com.zxpay</groupId>
+            <artifactId>infrastructure</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
