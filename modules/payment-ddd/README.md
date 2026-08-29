@@ -1,20 +1,17 @@
-# payment-ddd: DDD demo module for payments
+# Payment DDD (research)
 
-This module is a minimal Java + Spring Boot implementation to demonstrate DDD patterns applied to a payment gateway aggregator.
+This module is a DDD-focused demo for research into cross-border payment aggregator design.
 
-Highlights:
-- Domain layer with Payment aggregate and domain behaviors
-- Application service that orchestrates channel adapters
-- Infrastructure adapters for Stripe (real SDK demo) and PayPal (stub)
-- Webhook endpoints that receive channel callbacks and normalize them via adapters
+Important note
+- This repository is research-focused. We prioritize domain modeling, aggregates, domain events, and Saga examples. External SDKs and real HTTP integrations are included only as examples and can be removed. You don't need the system to be runnable to benefit from the DDD artifacts.
 
-Run (local):
-- Start Postgres: docker-compose up -d
-- Build & run:
-  mvn -f modules/payment-ddd/pom.xml spring-boot:run
+What is included
+- Domain: Payment & Refund aggregates, value objects, domain events
+- Application: CreatePaymentService, ProcessWebhookService, RefundService
+- Infra: ChannelAdapter interface and example adapters (Stripe, PayPal); PayPal includes a sandbox-style client but is optional for research
+- Event bus: InMemoryEventBus demonstrating domain event publication & subscription
+- Saga: RefundSaga demonstrating a simple process manager
+- Tests: domain-level tests and adapter-contract style unit tests
+- DESIGN.md: high-level design notes, sequence flows, bounded contexts and trade-offs
 
-Env:
-- Copy modules/payment-ddd/.env.example -> .env and set STRIPE_API_KEY to your Stripe test key if you want to exercise Stripe flows.
-
-Notes:
-- This is a research/demo project focusing on DDD structure. Security, production hardening, and full channel integrations are intentionally minimal.
+If you are interested in a smaller, dependency-free artifact for publication or peer review, I can remove external SDKs and keep only the domain & contract tests. Currently the code contains example integrations but those are clearly marked.
